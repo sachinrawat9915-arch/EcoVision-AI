@@ -1,4 +1,5 @@
 export const MODEL_BASE_PATH = '/models/teachable-machine/'
+const MODEL_VERSION = '08ae891c5ee7'
 
 export type Prediction = {
   className: string
@@ -27,8 +28,8 @@ let modelPromise: Promise<LoadedModel> | null = null
 async function loadModel(): Promise<LoadedModel> {
   if (!modelPromise) {
     modelPromise = (async () => {
-      const modelUrl = `${MODEL_BASE_PATH}model.json`
-      const metadataUrl = `${MODEL_BASE_PATH}metadata.json`
+      const modelUrl = `${MODEL_BASE_PATH}model.json?v=${MODEL_VERSION}`
+      const metadataUrl = `${MODEL_BASE_PATH}metadata.json?v=${MODEL_VERSION}`
       const modelResponse = await fetch(modelUrl, { method: 'HEAD' })
 
       if (!modelResponse.ok) {
